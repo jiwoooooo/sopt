@@ -1,0 +1,28 @@
+﻿-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
+
+-- user Table Create SQL
+CREATE TABLE user
+(
+    `userIdx`  INT            NOT NULL    AUTO_INCREMENT COMMENT '사용자 고유 번호', 
+    `name`     VARCHAR(45)    NULL        COMMENT '이름', 
+    `partIdx`  INT            NULL        COMMENT '파트', 
+    PRIMARY KEY (userIdx)
+);
+
+ALTER TABLE user COMMENT '유저 테이블';
+
+
+-- part Table Create SQL
+CREATE TABLE part
+(
+    `partIdx`  INT            NOT NULL    AUTO_INCREMENT COMMENT '파트 고유 번호', 
+    `name`     VARCHAR(45)    NULL        COMMENT '이름', 
+    PRIMARY KEY (partIdx)
+);
+
+ALTER TABLE part COMMENT '파트 테이블';
+
+ALTER TABLE part ADD CONSTRAINT FK_part_partIdx_user_partIdx FOREIGN KEY (partIdx)
+ REFERENCES user (partIdx)  ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
